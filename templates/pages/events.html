@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <main class="content">
+      <aside class="filter-container">
+
+        <h2>Filters</h2>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Event ID</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="000002">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Event Name</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="Birthday">
+          </div>
+        </div>
+
+        <label for="completion_time">Start Date</label>
+        <input type="date" id="completion_time">
+
+        <label for="completion_time">End Date</label>
+        <input type="date" id="completion_time">
+
+        <div class="filter-input-container">
+            <label for="filter-text" class="filter-input-label">Public or Private</label>
+            <select id="education">
+                <option value="AD">Public</option>
+                <option value="BD">Private</option>
+            </select>
+            </div>
+          </div>
+      
+        <button id="filter-update-button" class="action-button">Search</button>
+        <button id="filter-update-button" class="action-button">Add Row</button>
+        <button id="filter-update-button" class="action-button">Insert</button>
+
+      </aside>
+     <div class="table-container">
+      <table class="tb">
+        <tr>
+          <th>Event ID</th>     
+          <th>Event Name</th>
+          <th>Event Location</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Public or Private</th>
+          <th>Options</th>
+        </tr>
+        {% if (data is defined) and data %} {% for item in data %}
+        <tr>
+
+          <td>{{ item['id'] }}</td>
+          <td>{{ item['name'] }}</td>
+          <td>{{ item['location'] }}</td>
+          <td>{{ item['start_date'] }}</td>
+          <td>{{ item['end_date'] }}</td>
+          <td>{{ item['public_or_private'] }}</td>
+          <td><button id="filter-update-button" class="action-button">Update</button> 
+            <button id="filter-update-button" class="action-button">Delete</button></td>
+          
+        </tr>
+
+        {% endfor %} {% else %}
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td><button id="filter-update-button" class="action-button">Update</button> 
+          <button id="filter-update-button" class="action-button">Delete</button></td>
+        {% endif %}
+
+      </table>
+        </div>
+
+    </main>
+
+  </body>
+</html>
+{% endblock %}

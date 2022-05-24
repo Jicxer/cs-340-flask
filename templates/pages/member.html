@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <main class="content">
+      <aside class="filter-container">
+
+        <h2>Filters</h2>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Member ID</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="000005">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Title</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="VIP">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">First Name</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="Johnny">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Last Name</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="Appleseed">
+          </div>
+        </div>
+
+        <label for="completion_time">Birthday</label>
+        <input type="date" id="completion_time">
+
+
+
+        <button id="filter-update-button" class="action-button">Search</button>
+        <button id="filter-update-button" class="action-button">Add Row</button>
+        <button id="filter-update-button" class="action-button">Insert</button>
+
+      </aside>
+     <div class="table-container">
+      <table class="tb">
+        <tr>
+          <th>Member ID</th>
+          <th>Title</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Birthday</th>
+          <th>Location</th>
+          <th>Options</th>
+        </tr>
+        {% if (data is defined) and data %} {% for item in data %}
+        <tr>
+          <td>{{ item['id'] }}</td>
+          <td>{{ item['title'] }}</td>
+          <td>{{ item['first_name'] }}</td>
+          <td>{{ item['last_name'] }}</td>
+          <td>{{ item['dob'] }}</td>
+          <td>{{ item['location'] }}</td>
+          <td><button id="filter-update-button" class="action-button">Update</button> 
+            <button id="filter-update-button" class="action-button">Delete</button></td>
+        </tr>
+        {% endfor %} {% else %}
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td><button id="filter-update-button" class="action-button">Update</button> 
+          <button id="filter-update-button" class="action-button">Delete</button></td>
+        {% endif %}
+      </table>
+        </div>
+
+    </main>
+
+  </body>
+</html>
+{% endblock %}

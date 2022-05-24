@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="content">
+      <aside class="filter-container">
+
+        <h2>Filters</h2>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Sponsor ID</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="000001">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Sponsor Service ID</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="0001">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Email</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="sponsor@hotmail.com">
+          </div>
+        </div>
+
+        <div class="filter-input-container">
+          <label for="filter-text" class="filter-input-label">Phone Number</label>
+          <div class="filter-input-element">
+            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="xxx-xxx-xxxx">
+          </div>
+        </div>
+
+        <button id="filter-update-button" class="action-button">Search</button>
+        <button id="filter-update-button" class="action-button">Add Row</button>
+        <button id="filter-update-button" class="action-button">Insert</button>
+
+      </aside>
+     <div class="table-container">
+      <table class="tb">
+        <tr>
+          <th>Sponsor ID</th>
+          <th>Sponsor Service ID</th>
+          <th>Sponsor Name</th>
+          <th>Sponsor Email</th>
+          <th>Sponsor Phone Number</th>
+          <th>Options</th>
+        </tr>
+        {% if (data is defined) and data %} {% for item in data %}
+        <tr>
+          <td>{{ item['id'] }}</td>
+          <td>{{ item['service_id'] }}</td>
+          <td>{{ item['name'] }}</td>
+          <td>{{ item['email'] }}</td>
+          <td>{{ item['phonenumber'] }}</td>
+          <td><button id="filter-update-button" class="action-button">Update</button> 
+            <button id="filter-update-button" class="action-button">Delete</button></td>
+          
+        </tr>
+
+        {% endfor %} {% else %}
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td><button id="filter-update-button" class="action-button">Update</button> 
+          <button id="filter-update-button" class="action-button">Delete</button></td>
+        {% endif %}
+
+      </table>
+        </div>
+
+    </main>
+
+  </body>
+</html>
+{% endblock %}
