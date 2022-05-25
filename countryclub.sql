@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS sponsors;
 
 CREATE TABLE `sponsors` (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    `service_id` INT AUTO_INCREMENT,
+    `service_id` INTEGER AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `phonenumber` varchar(15) NOT NULL

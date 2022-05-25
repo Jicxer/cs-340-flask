@@ -4,7 +4,14 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
 import datetime
 from flask_pymongo import PyMongo
-       
+
+def app(environ, start_response):
+    data = b"Hello, World!\n"
+    start_response("200 OK", [
+        ("Content-Type", "text/plain"),
+        ("Content-Length", str(len(data)))
+    ])
+    return iter([data])
             
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/"
@@ -26,18 +33,19 @@ def get_db_connection():
 #     return post
 
 
+# Main route for the homepage
 @app.route('/')
 def home():
     conn = get_db_connection()
-    # posts = conn.execute('SELECT * FROM posts').fetchall()
     conn.close()
     return render_template("/pages/index.html",homeIsActive=True)
 
+# Return to the index.html route since it was already defined
 @app.route('/index.html')
 def other():
     return redirect("/")
 
-
+# Route for members database
 @app.route("/member.html", methods=['GET','POST'])
 def member_route():
     conn = get_db_connection()
@@ -46,6 +54,72 @@ def member_route():
     data = cur.fetchall()
     conn.close()
     return render_template("/pages/member.html",homeIsActive=True,data=data)
+
+@app.route("/add-members", methods=['GET','POST'])
+def add_members():
+        # get the fields data
+
+        if(request.method == "GET"):
+            return render_template("/members.html")
+
+        elif (request.method == "POST"):
+            title = request.form['title']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            dob = request.form['dob']
+            location = request.form['location']
+            conn = get_db_connection()
+            conn.execute('INSERT INTO members (title, first_name, last_name, dob, location) VALUES (?, ?, ?, ?, ?)',
+                            (title, first_name, last_name, dob, location))
+            conn.commit()
+            conn.close()
+
+            return redirect("/member.html")
+
+
+@app.route("/search-members", methods=['GET','POST'])
+def search_members():
+        # get the fields data
+
+        if(request.method == "GET"):
+            return render_template("/members.html")
+
+        elif (request.method == "POST"):
+            title = request.form['title']
+            print(title)
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            dob = request.form['dob']
+            location = request.form['location']
+            conn = get_db_connection()
+            conn.execute('UPDATE members SET(title, first_name, last_name, dob, location) VALUES (?, ?, ?, ?, ?)',
+                            (title, first_name, last_name, dob, location))
+            conn.commit()
+            conn.close()
+
+            return redirect("/member.html")
+
+
+@app.route('/delete-members', methods=['GET','POST'])
+def delete_members():
+
+        if(request.method == "GET"):
+            return render_template("/members.html")
+
+        elif (request.method == "POST"):
+            title = request.form['title']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            dob = request.form['dob']
+            location = request.form['location']
+            conn = get_db_connection()
+            conn.execute('INSERT INTO members (title, first_name, last_name, dob, location) VALUES (?, ?, ?, ?, ?)',
+                            (title, first_name, last_name, dob, location))
+            conn.commit()
+            conn.close()
+
+            return redirect("/member.html")
+
 
 @app.route("/clubs.html", methods=['GET','POST'])
 def clubs_route():
