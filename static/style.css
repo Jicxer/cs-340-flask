@@ -67,6 +67,13 @@ display: flex;
     margin: auto;
 }
 
+.delete-btn{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
 #completion_time{
     font-size: 14px;
     /* display: flex; */

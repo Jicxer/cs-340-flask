@@ -19,7 +19,6 @@ https://github.com/knightsamar/CS340_starter_flask_app
 
 
 Things to do:
-1) Test and implement other entries on tables for the database
-2) Fix a many to many relationship type
-3) Host local implementation on heroku
-4) Implement update/delete
+1) Fix a many to many relationship type
+2) Host local implementation on heroku
+3) Search Query

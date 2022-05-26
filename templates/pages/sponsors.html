@@ -1,45 +1,101 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <main class="content">
-      <aside class="filter-container">
+<main class="content">
+  <aside class="filter-container">
 
-        <h2>Filters</h2>
+    <h2>Update Database</h2>
 
-        <div class="filter-input-container">
-          <label for="filter-text" class="filter-input-label">Sponsor ID</label>
-          <div class="filter-input-element">
-            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="000001">
-          </div>
-        </div>
+    <form action="{{ url_for('update_sponsors') }}" method = "POST">
 
-        <div class="filter-input-container">
-          <label for="filter-text" class="filter-input-label">Sponsor Service ID</label>
-          <div class="filter-input-element">
-            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="0001">
-          </div>
-        </div>
+      <div class="filter-input-container">
+        <label for="id">Sponsor ID</label>
+        <input type="text" name="id"
+               placeholder="1" class="form-control"
+               value="{{ request.form['id'] }}"></input>
+    </div>
 
-        <div class="filter-input-container">
-          <label for="filter-text" class="filter-input-label">Email</label>
-          <div class="filter-input-element">
-            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="sponsor@hotmail.com">
-          </div>
-        </div>
+    <div class="filter-input-container">
+      <label for="service_id">Sponsor Service ID</label>
+      <input type="text" name="service_id"
+             placeholder="1" class="form-control"
+             value="{{ request.form['service_id'] }}"></input>
+  </div>
 
-        <div class="filter-input-container">
-          <label for="filter-text" class="filter-input-label">Phone Number</label>
-          <div class="filter-input-element">
-            <input type="text" name="filter-text" id="filter-text" class="filter-input" placeholder="xxx-xxx-xxxx">
-          </div>
-        </div>
+  <div class="filter-input-container">
+    <label for="name">Sponsor Name</label>
+    <input type="text" name="name"
+           placeholder="Adike" class="form-control"
+           value="{{ request.form['name'] }}"></input>
+</div>
 
-        <button id="filter-update-button" class="action-button">Search</button>
-        <button id="filter-update-button" class="action-button">Add Row</button>
-        <button id="filter-update-button" class="action-button">Insert</button>
+  <div class="filter-input-container">
+    <label for="email">Email</label>
+    <input type="text" name="email"
+           placeholder="Pumanike@yahoo.com" class="form-control"
+           value="{{ request.form['email'] }}"></input>
+</div>
 
-      </aside>
-     <div class="table-container">
+<div class="filter-input-container">
+  <label for="phonenumber">Phone number</label>
+  <input type="text" name="phonenumber"
+         placeholder="503-503-5003" class="form-control"
+         value="{{ request.form['phonenumber'] }}"></input>
+</div>
+
+
+    <div class="form-group">
+      <form action="{{ url_for('add_sponsors') }}" method="POST">
+        <input type="submit" value="Update"
+                class="btn-danger-btn-sm">
+    </form>
+
+    </form>
+   </div>
+   
+  </form>
+  </aside>
+  
+ <div class="table-container">
+   
+  <div class="insert-container">
+    <form action="{{ url_for('add_sponsors') }}" class= 'insert-button' method = "POST">
+
+    <div class="form-group">
+      <label for="service_id">Service ID</label>
+      <input type="text" name="service_id"
+             placeholder="1" class="form-control"
+             value="{{ request.form['service_id'] }}"></input>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Sponsor Name</label>
+    <input type="text" name="name"
+           placeholder="Adike" class="form-control"
+           value="{{ request.form['name'] }}"></input>
+</div>
+
+<div class="form-group">
+  <label for="email">Sponsor Email</label>
+  <input type="text" name="email"
+         placeholder="Pumanike@yahoo.com" class="form-control"
+         value="{{ request.form['email'] }}"></input>
+</div>
+
+    <div class="form-group">
+      <label for="phonenumber">Phone number</label>
+      <input type="text" name="phonenumber"
+             placeholder="971-971-9701" class="form-control"
+             value="{{ request.form['phonenumber'] }}"></input>
+  </div>
+
+    <div class="form-group">
+      <label for="submit"></label>
+      <button  class="form-insert" type="submit" >Insert</button>
+  </div>
+    </form>
+   </div>
+  </form>
       <table class="tb">
         <tr>
           <th>Sponsor ID</th>
@@ -56,8 +112,12 @@
           <td>{{ item['name'] }}</td>
           <td>{{ item['email'] }}</td>
           <td>{{ item['phonenumber'] }}</td>
-          <td><button id="filter-update-button" class="action-button">Update</button> 
-            <button id="filter-update-button" class="action-button">Delete</button></td>
+          <td>
+            <form action="{{ url_for('delete_sponsors', id=item['id']) }}" method="POST" class = delete-btn>
+              <input type="submit" value="Delete"
+                      class="btn-delete"
+                      onclick="return confirm('Are you sure you want to delete this entry?')">
+          </form>
           
         </tr>
 
@@ -67,7 +127,7 @@
         <td>NULL</td>
         <td>NULL</td>
         <td>NULL</td>
-        <td><button id="filter-update-button" class="action-button">Update</button> 
+        <td>
           <button id="filter-update-button" class="action-button">Delete</button></td>
         {% endif %}
 

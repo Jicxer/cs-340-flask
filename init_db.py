@@ -39,7 +39,6 @@ cur.execute("INSERT INTO sponsors (name, email, phonenumber) VALUES (?, ?, ?)",
 cur.execute("INSERT INTO events (name, location, start_date, end_date, public_or_private) VALUES (?, ?, ?, ?, ?)",
             ('Presidential Joust', 'White House', '2022-5-24', '2022-5-24', 'public') )
 
-cur.execute('SELECT * FROM members WHERE (first_name) VALUES (?)',
-                        ('Hoe'))
+cur.execute('DELETE FROM members WHERE first_name = ?', ('Hoe',))
 connection.commit()
 connection.close()
