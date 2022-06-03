@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS members;
-
 CREATE TABLE `members` (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
     `first_name` VARCHAR(255) NOT NULL,
     `last_name` VARCHAR(255) NOT NULL,
@@ -13,17 +12,17 @@ CREATE TABLE `members` (
 DROP TABLE IF EXISTS clubs;
 
 CREATE TABLE `clubs` (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `address` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `phonenumber` varchar(15) NOT NULL
 );
 
-DROP TABLE IF EXISTS 'events';
+DROP TABLE IF EXISTS events;
 
 CREATE TABLE `events` (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `location` VARCHAR(255) NOT NULL,
     `start_date` DATE NOT NULL,
@@ -35,8 +34,8 @@ DROP TABLE IF EXISTS sponsors;
 
 
 CREATE TABLE `sponsors` (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    `service_id` INTEGER AUTO_INCREMENT,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `service_id` INTEGER ,
     `name` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `phonenumber` varchar(15) NOT NULL

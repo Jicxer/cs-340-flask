@@ -5,7 +5,9 @@ To activate coding enviroment:
 
 source venv/bin/activate
 
-python app.py
+source ./venv/bin/activate
+export FLASK_APP=run.py
+python -m flask run -h 0.0.0.0 -p 8042 --reload
 
 Code and html based off flask and python tutorials included below:
 
@@ -17,8 +19,5 @@ https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-u
 
 https://github.com/knightsamar/CS340_starter_flask_app
 
-
-Things to do:
-1) Fix a many to many relationship type
-2) Host local implementation on heroku
-3) Search Query
+How to run persistently:
+gunicorn run:webapp -b 0.0.0.0:8020 -D 
